@@ -135,7 +135,6 @@ func (h *handlerProduct) UpdateDataProduct(c echo.Context) error {
 		product.Price = price
 	}
 
-
 	var dataImage = dataImageUpdate
 	if dataImage != "" {
 		product.Image = dataImage
@@ -167,11 +166,11 @@ func (h *handlerProduct) DeleteDataProduct(c echo.Context) error {
 
 func convertResponseProduct(u models.Product) productdto.ProductResponse {
 	return productdto.ProductResponse{
-		ProductID: u.ProductID,
+		ProductID:   u.ProductID,
 		ProductCode: u.ProductCode,
 		ProductName: u.ProductName,
-		Quantity: u.Quantity,
-		Price:      u.Price,
-		Image:     u.Image,
+		Quantity:    u.Quantity,
+		Price:       u.Price,
+		Image:       u.Image,
 	}
 }
