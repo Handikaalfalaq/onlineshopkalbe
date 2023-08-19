@@ -138,6 +138,14 @@
     border-radius: 10px;
     border: 1px solid #80BC24;
 }
+
+.modalPlusProductButton{
+    margin-top: 20px;
+}
+
+.tabelPlusProductControl{
+    width: 90%;
+}
   
 .modalLoginButtonHere, .modalRegisterButtonHere  {
     border:0px; 
@@ -149,9 +157,11 @@
 
 
 
+
 /* ----------------------------------------Navbar---------------------------------------- */
 .logoNavbar {
     height: 80px;
+    cursor: pointer;
 }
 
 .login, .register, .logOut {
@@ -188,6 +198,16 @@
     color: white;
     border: 2px solid #80BC24;
     background-color: #80BC24;
+}
+
+.fullNameLogin {
+    color: #80BC24;
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    text-align: center;
+    margin: auto 30px;
+    cursor: pointer;
 }
 
 /* ----------------------------------------Penjualan---------------------------------------- */
@@ -252,14 +272,14 @@
     margin: 50px auto;
     border-radius: 20px;
     color: white;
-    height: 300px;
+    height: auto;
     width: 1000px;
-    font-size: 32px;
+    font-size: 25px;
     font-weight: bold;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0px 40px;
+    padding: 30px 40px;
 }
 
 .containerTitleDataPembelian {
@@ -314,4 +334,27 @@
     color: white;
     background-color: #80BC24;
     padding:5px 0px;
+}
+
+.editProfile {
+    border: 3px solid white;
+    height: 50px;
+    width: 230px;
+    color: white;
+    font-size: 18px;
+    background-color: #80BC24;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    margin: auto;
+}
+
+.editProfile:hover {
+    border: 3px solid #80BC24;
+    background-color: white;
+    color: #80BC24;
 }

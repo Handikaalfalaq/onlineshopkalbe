@@ -1,46 +1,82 @@
-import { React} from 'react';
-import { Modal, Form } from "react-bootstrap";
+import { React, useState } from 'react';
+import { Modal, Form, Alert} from "react-bootstrap";
+import { useMutation } from 'react-query';
+import {API} from '../../config/Api';
+import Swal from 'sweetalert2';
 
 function ModalRegister({show, onHide, hereLogin}) {
+    const [message, setMessage] = useState(false);
+    const [formRegister, setFormRegister] = useState({
+        email: '',
+        password: '',
+        customerName: '',
+      });
+
+    const handleChange = (e) => {
+    setFormRegister({
+        ...formRegister,
+        [e.target.name]: e.target.value,
+    });
+    };
+
+    const handleSubmit = useMutation(async (e) => {
+        try {
+          e.preventDefault();
+          
+          const config = {
+            headers: {
+              'Content-type': 'multipart/form-data',
+            },
+          };
+    
+          const formData = new FormData();
+          formData.set('email', formRegister.email);
+          formData.set('password', formRegister.password);
+          formData.set('customerName', formRegister.customerName);
+    
+          const response = await API.post('/register', formData, config);
+          console.log(response);
+
+          onHide()
+          Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Berhasil Register',
+              showConfirmButton: false,
+              timer: 3000
+            })
+        } catch (error) {
+          const alert = (
+            <Alert variant="danger" className="py-1">
+              email sudah terdaftar!
+            </Alert>
+          );
+          setMessage(alert);
+          console.log("register failed : ", error);
+        }
+      });
 
     const handleCloseModal = () => {
         onHide();
     };
     return (
-        <Modal show={show} onHide={handleCloseModal} >
+        <Modal show={show} onHide={handleCloseModal} onSubmit={(e) => handleSubmit.mutate(e)}>
             <Modal.Body className='modalRegisterBody'>
                 <div className='backgroundModalLogin'>
                     <Modal.Title className='modalRegisterTitle' >Register</Modal.Title>
+                    {message && message}
                     <Form style={{ width: '416px', margin:'auto'}}>
                         <Form.Group className="mb-3" >
-                            <Form.Control className='modalRegisterControl' name="email" type="email" placeholder="Email"  required />
+                            <Form.Control className='modalRegisterControl' name="email" onChange={handleChange} type="email" placeholder="Email"  required />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Control className='modalRegisterControl' name="password" type="password" placeholder="password"  required/>
+                            <Form.Control className='modalRegisterControl' name="password" onChange={handleChange} type="password" placeholder="password"  required/>
                         </Form.Group>
 
                         <Form.Group className="mb-3" >
-                            <Form.Control className='modalRegisterControl'  name="fullName" type="text" placeholder="Customer Name"  required/>
+                            <Form.Control className='modalRegisterControl'  name="customerName" onChange={handleChange} type="text" placeholder="Customer Name"  required/>
                         </Form.Group>
-
-                        <Form.Group className="mb-3" >
-                            <Form.Control className='modalRegisterControl'  name="customerAddres" type="text" placeholder="Customer Addres"  required/>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Gender:</Form.Label>
-                            <div className="mb-3">
-                                <Form.Check inline label="Pria" name="gender" type="radio" value="male" required />
-                                <Form.Check inline label="Wanita" name="gender" type="radio" value="female" required/>
-                            </div>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Tanggal Lahir</Form.Label>
-                            <Form.Control  name="birthdate" type="date" required/>
-                        </Form.Group>
-
 
                         <button className='modalRegisterButton' type="submit">Register</button>
 
