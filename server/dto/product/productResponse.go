@@ -1,7 +1,7 @@
 package productdto
 
 type ProductResponse struct {
-	ProductID int    `json:"ProductId"`
+	ProductID int    `json:"productId"`
 	ProductCode string `json:"productCode" form:"productCode"`
 	ProductName string    `json:"productName" form:"productName"`
 	Quantity int    `json:"quantity" form:"quantity"`

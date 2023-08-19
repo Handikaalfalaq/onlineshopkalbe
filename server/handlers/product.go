@@ -23,7 +23,7 @@ func HandlerProduct(ProductRepository repositories.ProductRepository) *handlerPr
 }
 
 func (h *handlerProduct) CreateNewProduct(c echo.Context) error {
-	dataImage := c.Get("dataImage").(string)
+	
 
 	request := new(productdto.CreateProductRequest)
 
@@ -60,7 +60,6 @@ func (h *handlerProduct) CreateNewProduct(c echo.Context) error {
 		ProductName: c.FormValue("productName"),
 		Quantity:    Quantity,
 		Price:       Price,
-		Image:       dataImage,
 	}
 
 	data, err := h.ProductRepository.CreateProduct(product)
