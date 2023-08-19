@@ -13,7 +13,7 @@ function ModalNewProduct({show, onHide}) {
         image:'',
       });
 
-      console.log(formProduct)
+      // console.log(formProduct)
     
       const handleChange = (e) => {
         setFormProduct({
@@ -42,7 +42,7 @@ function ModalNewProduct({show, onHide}) {
             return;
           }
       
-          formData.append('image', formProduct.image[0], formProduct.image[0].name);
+          // formData.append('image', formProduct.image[0], formProduct.image[0].name);
       
           Swal.showLoading();
     
@@ -55,7 +55,7 @@ function ModalNewProduct({show, onHide}) {
             icon: 'success',
             title: 'Product Baru Berhasil Ditambahkan',
             showConfirmButton: false,
-            timer: 3000
+            timer: 3000,
           }).then(() => {
             window.location.reload();
           });
@@ -91,10 +91,10 @@ function ModalNewProduct({show, onHide}) {
                         <Form.Control className='modalPlusProductControl' name="price"  onChange={handleChange} type="text" placeholder="Price" required/>
                     </Form.Group>
 
-                    <Form.Group >
+                    {/* <Form.Group >
                       <label className='tabelFotoProduct'>Pilih foto Product</label>
                       <Form.Control className='tabelPlusProductControl' name="image"  onChange={handleChange} type="file" accept=".jpg, .png" required/>
-                    </Form.Group>
+                    </Form.Group> */}
 
                     <button className='modalPlusProductButton' type="submit">PlusProduct</button>
 

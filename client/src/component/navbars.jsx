@@ -75,7 +75,7 @@ function Navbars() {
               ) : (
                 <>
                   <div className='fullNameLogin' onClick={() => navigate("/profile")}>
-                    saya
+                    {state.user.customerName}
                   </div>
                   <div className='logOut' onClick={() => logout()}>logout</div>
                 </>

@@ -1,23 +1,43 @@
+import { React, useState, useEffect } from 'react';
 import { Card } from "react-bootstrap";
 import { UserContext } from '../context/UserContext';
 import { useContext } from 'react';
+import { API } from '../config/Api';
 
 function Home() {
+  const [dataAllProduct, setDataAllProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [state, dispatch] = useContext(UserContext);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await API.get(`/products`);
+        setDataAllProduct(response.data.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
     return(
         <>
-        <div className="containerCard">
-
-            <Card className="cardHome" >
-              <div className='imageProduct'  ></div>
+         <div className="containerCard">
+        {isLoading ? (
+          <div></div>
+        ) : (
+          dataAllProduct.map((product, index) => (
+            <Card className="cardHome" key={index}>
+              {/* <div className='imageProduct'  ></div> */}
               <Card.Body>
                 <div className="informasiProduct">
-                    <div className="product">Product Id</div>
-                    <div className="product">Product Code</div>
-                    <div className="product">Product Name</div>
-                    <div className="product">Quantity</div>
-                    <div className="product">Price</div>
-                    <div className="product">Update</div>
+                <div className="product">Product Id : {product.ProductId}</div>
+                      <div className="product">Product Code : {product.productCode}</div>
+                      <div className="product">Product Name : {product.productName}</div>
+                      <div className="product">Quantity : {product.quantity}</div>
+                      <div className="product">Price : {product.price}</div>
                 </div>
                 
                 {state.isLogin ? (
@@ -30,6 +50,8 @@ function Home() {
                 
               </Card.Body>
             </Card>
+            ))
+          )}
 
         </div>
 
